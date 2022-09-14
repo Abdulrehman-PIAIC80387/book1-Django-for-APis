@@ -29,16 +29,30 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites', # new
+
+    
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'book',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken', # new
+    # 'rest_auth',
+    'allauth', # new
+'allauth.account', # new
+'allauth.socialaccount', # new
+'rest_auth',
+'rest_auth.registration', # new
+
+    
 ]
 
 MIDDLEWARE = [
@@ -120,3 +134,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+REST_FRAMEWORK = {
+'DEFAULT_PERMISSION_CLASSES': [
+'rest_framework.permissions.IsAuthenticated',
+],
+'DEFAULT_AUTHENTICATION_CLASSES': [
+'rest_framework.authentication.SessionAuthentication',
+'rest_framework.authentication.TokenAuthentication', # new
+],
+}

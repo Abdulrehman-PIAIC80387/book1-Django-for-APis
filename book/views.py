@@ -2,9 +2,9 @@ from django.shortcuts import render
 from .models import My_library
 from django.views.generic import ListView
 # Create your views here.
-from rest_framework import generics
+from rest_framework import generics,permissions
 from .serializers import bookserializer
-
+from .permissions import IsAuthorOrReadOnly # new
 
 class get_book(ListView):
     model = My_library
@@ -31,6 +31,8 @@ class postdetails(generics.RetrieveUpdateDestroyAPIView):
 
 
 class postlist(generics.ListCreateAPIView):
+    # permission_classes = (permissions.IsAuthenticated,) # new
+    permission_classes = (IsAuthorOrReadOnly,) # new
     queryset = My_library.objects.all()
     serializer_class = bookserializer
 

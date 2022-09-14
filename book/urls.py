@@ -10,6 +10,7 @@ urlpatterns = [
     path('details/<int:pk>/',details.as_view()),
     path('postlist/',postlist.as_view()),
     path('details_new/<int:pk>/',postdetails.as_view())
+    
 
 
     
